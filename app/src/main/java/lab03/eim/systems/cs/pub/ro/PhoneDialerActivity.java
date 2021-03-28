@@ -16,12 +16,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class PhoneDialerActivity extends AppCompatActivity {
-    final public static int PERMISSION_REQUEST_CALL_PHONE = 1;
+    public static final int PERMISSION_REQUEST_CALL_PHONE = 1;
+    public static final int CONTACTS_MANAGER_REQUEST_CODE = 2;
 
     private EditText numberEditText;
-    private ImageButton deleteButton, callButton, cancelButton;
+    private ImageButton deleteButton, callButton, cancelButton, addContactButton;
     private Button oneButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton,
             eightButton, nineButton, zeroButton, starButton, hashButton;
 
@@ -69,11 +71,27 @@ public class PhoneDialerActivity extends AppCompatActivity {
         }
     }
 
+    private AddContactButtonClickListener addContactButtonClickListener = new AddContactButtonClickListener();
+    private class AddContactButtonClickListener implements Button.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            String phoneNumber = numberEditText.getText().toString();
+
+            if (phoneNumber.length() > 0) {
+                Intent addContactIntent = new Intent("ro.pub.cs.systems.eim.lab04.contactsmanager.intent.action.ContactsManagerActivity");
+                addContactIntent.putExtra("ro.pub.cs.systems.eim.lab04.contactsmanager.PHONE_NUMBER_KEY", phoneNumber);
+                startActivityForResult(addContactIntent, CONTACTS_MANAGER_REQUEST_CODE);
+            } else {
+                Toast.makeText(PhoneDialerActivity.this, "Phone number received from intent is null!", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_dialer);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         numberEditText = (EditText) findViewById(R.id.phone_number_edit);
         deleteButton = (ImageButton) findViewById(R.id.delete_btn);
@@ -108,5 +126,7 @@ public class PhoneDialerActivity extends AppCompatActivity {
         callButton.setOnClickListener(callButtonClickListener);
         cancelButton = (ImageButton) findViewById(R.id.cancel_btn);
         cancelButton.setOnClickListener(hangUpButtonClickListener);
+        addContactButton = (ImageButton) findViewById(R.id.add_contact_btn);
+        addContactButton.setOnClickListener(addContactButtonClickListener);
     }
 }

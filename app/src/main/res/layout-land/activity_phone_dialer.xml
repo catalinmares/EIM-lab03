@@ -18,7 +18,7 @@
         android:id="@+id/phone_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:rowCount="3"
+        android:rowCount="4"
         android:columnCount="5"
         android:layout_gravity="center">
 
@@ -101,6 +101,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_baseline_call_end_24"/>
+        <ImageButton
+            android:id="@+id/add_contact_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_perm_contact_calendar_24"
+            android:layout_column="2"
+            android:layout_gravity="center"/>
     </GridLayout>
 
 

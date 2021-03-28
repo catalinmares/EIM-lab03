@@ -104,10 +104,15 @@
             android:src="@drawable/ic_baseline_call_24"
             android:layout_gravity="center"/>
         <ImageButton
+            android:id="@+id/add_contact_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_perm_contact_calendar_24"
+            android:layout_gravity="center"/>
+        <ImageButton
             android:id="@+id/cancel_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
             android:src="@drawable/ic_baseline_call_end_24"
             android:layout_gravity="center"/>
     </GridLayout>
